@@ -10,8 +10,10 @@
   "author": "weineel",
   "license": "MIT",
   "dependencies": {
+    "boom": "~4.2.0",
     "elasticsearch": "~12.1.3",
     "glob": "^7.1.1",
+    "hapi": "~14.2.0",
     "lodash": "~4.17.4"
   },
   "devDependencies": {

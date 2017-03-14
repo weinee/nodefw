@@ -16,11 +16,11 @@ var esclient = new elasticsearch.Client({
 
 var getEsInfo = async function() {
 	var esInfo = await esclient.info();
-	console.log(esInfo); 
+	console.log(esInfo);
 }
 
-getEsInfo();  
-   
+getEsInfo();
+
 // esclient.info().then(function(info){
 // 	console.log(info);
 // });

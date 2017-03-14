@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node index.js",
     "start": "node index.js",
-    "wp-dev":"webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+    "wp-dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
   },
   "author": "weineel",
   "license": "MIT",
@@ -31,10 +31,12 @@
     "babel-preset-stage-0": "6.22.0",
     "babel-runtime": "6.23.0",
     "css-loader": "0.27.3",
+    "file-loader": "^0.10.1",
     "grunt": "1.0.1",
     "grunt-babel": "6.0.0",
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-watch": "1.0.0",
+    "html-loader": "^0.4.5",
     "load-grunt-tasks": "3.5.2",
     "style-loader": "0.13.2",
     "webpack": "^2.2.1",

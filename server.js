@@ -66,7 +66,7 @@ server.route({
     method: 'GET',
     path: '/views/index',
     handler: function (req, reply) {
-        return reply.view('index2222');
+        return reply.view('index');
     }
 });
 

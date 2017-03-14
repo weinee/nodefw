@@ -4,6 +4,6 @@
 
 require('../css/index.css');
 
-document.write('It works weineel.');
+document.write('It works weineel0000.');
 
 document.write(require('./utils'));

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node index.js",
     "start": "node index.js",
-    "webpack-dev":"webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+    "wp-dev":"webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
   },
   "author": "weineel",
   "license": "MIT",

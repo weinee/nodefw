@@ -1,14 +1,14 @@
 import {red} from 'ansicolors';
 import Hapi from 'hapi';
 import {join} from 'path';
+import role from './src/role';
+import user from './src/user';
 
-const server = new Hapi.Server({
-
-});
+const server = new Hapi.Server({});
 
 server.connection({
-	host: 'localhost',
-	port: 8000
+    host: 'localhost',
+    port: 8000
 });
 
 // 注册插件
@@ -24,7 +24,7 @@ server.register([
     // console.log('jade view path', join(__dirname, 'views'));
     // 初始化
     server.views({
-        engines: { jade: require('jade')},
+        engines: {jade: require('jade')},
         path: join(__dirname, 'views')
     });
 
@@ -32,10 +32,23 @@ server.register([
 
 // 添加扩展，监听全局事件
 server.ext('onRequest', (request, reply) => {
-	// request.setUrl('/happy');
+    // request.setUrl('/happy');
     // console.log(red("error")); // 显示红色 log
-	return reply.continue();
+    return reply.continue();
 });
+
+/**
+ * 路由
+ * */
+role(server);
+user(server);
+
+
+
+
+
+
+
 
 server.route({
     method: 'GET',
@@ -48,7 +61,7 @@ server.route({
 // Add the route
 server.route({
     method: 'GET',
-    path:'/hello', 
+    path: '/hello',
     handler: function (request, reply) {
         return reply('hello world');
     }

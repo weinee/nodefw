@@ -38,18 +38,8 @@ server.ext('onRequest', (request, reply) => {
 });
 
 // 缓存
-const Client = require('catbox').Client;
-/// 在代码实现里可以找到支持的所有参数
-server.catbox = new Client(require('catbox-memory'), {
-    partition: 'weineel-server'
-});
-server.catbox.start((err) => {
-    if (err) {
-        console.log(err.message);
-    }
-});
-
-server.catbox.set({
+let catbox = require('./src/db/cache');
+catbox.set({
     id: 'user',
     segment: 'weineel-server'
 }, {

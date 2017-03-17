@@ -8,12 +8,13 @@ export default (server, path) => {
         method: 'GET',
         path: join(path, 'user'),
         handler: (request, reply) => {
+            let catbox = require('../db/cache');
             let key = {
                 id: 'user',
                 segment: 'weineel-server'
             };
-            server.catbox.get(key, (err, cached) => {
-                server.catbox.set(key, cached.item, 10 * 1000, (err) => {
+            catbox.get(key, (err, cached) => {
+                catbox.set(key, cached.item, 10 * 1000, (err) => {
                     if (err) {
                         console.log(err.message);
                     }

@@ -37,8 +37,32 @@ server.ext('onRequest', (request, reply) => {
     return reply.continue();
 });
 
+// 缓存
+const Client = require('catbox').Client;
+/// 在代码实现里可以找到支持的所有参数
+server.catbox = new Client(require('catbox-memory'), {
+    partition: 'weineel-server'
+});
+server.catbox.start((err) => {
+    if (err) {
+        console.log(err.message);
+    }
+});
+
+server.catbox.set({
+    id: 'user',
+    segment: 'weineel-server'
+}, {
+    name: 'weineel',
+    age: 25
+}, 10 * 1000, (err) => {
+    if (err) {
+        console.log(red('error'), err.message)
+    }
+});
+
 /**
- * 路由
+ * 路由 模块
  * */
 role(server);
 user(server);

@@ -8,7 +8,18 @@ export default (server, path) => {
         method: 'GET',
         path: join(path, 'user'),
         handler: (request, reply) => {
-            return reply('user rasdfs');
+            let key = {
+                id: 'user',
+                segment: 'weineel-server'
+            };
+            server.catbox.get(key, (err, cached) => {
+                server.catbox.set(key, cached.item, 10 * 1000, (err) => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                });
+                reply(`name: ${cached.item.name}, age: ${cached.item.age}, ttl: ${cached.ttl}`);
+            });
         }
     });
 }

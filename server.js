@@ -30,11 +30,47 @@ server.register([
 
 });
 
+server.filters = [];
+server.decorate('server', 'addFilter', (filter) => {
+    server.filters.push(filter);
+});
+
 // 添加扩展，监听全局事件
-server.ext('onRequest', (request, reply) => {
+server.ext('onRequest', async (request, reply) => {
     // request.setUrl('/happy');
     // console.log(red("error")); // 显示红色 log
+
+    async function doFilters(reply) {
+        if (server.filters.length > 0) {
+            for (let filter of server.filters) {
+                await filter(request, reply);
+            }
+        }
+    }
+    await doFilters();
+    // 定义了filters字段和addFilter方法, 调用过滤器
+
     return reply.continue();
+});
+
+server.addFilter((req, reply) => {
+    console.log('******* add filter 1');
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('******* filter 1');
+            resolve();
+        }, 5 * 1000);
+    });
+});
+
+server.addFilter(async (req, reply) => {
+    console.log('******* add filter 2');
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('******* filter 2');
+            resolve();
+        }, 10 * 1000);
+    });
 });
 
 // 缓存
@@ -45,7 +81,7 @@ catbox.set({
 }, {
     name: 'weineel',
     age: 25
-}, 10 * 1000, (err) => {
+}, 10 * 60 * 1000, (err) => {
     if (err) {
         console.log(red('error'), err.message)
     }

@@ -14,11 +14,11 @@ export default (server, path) => {
                 segment: 'weineel-server'
             };
             catbox.get(key, (err, cached) => {
-                catbox.set(key, cached.item, 10 * 1000, (err) => {
-                    if (err) {
-                        console.log(err.message);
-                    }
-                });
+                // catbox.set(key, cached.item, 10 * 1000, (err) => {
+                //     if (err) {
+                //         console.log(err.message);
+                //     }
+                // });
                 reply(`name: ${cached.item.name}, age: ${cached.item.age}, ttl: ${cached.ttl}`);
             });
         }
